@@ -1,0 +1,43 @@
+# Copyright (C) 2026 Guilamu
+# This file is distributed under the same license as the GF Merge Tag Autocomplete plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: GF Merge Tag Autocomplete 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/guilamu/gf-merge-tag-autocomplete/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-02-15T20:58:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: gf-merge-tag-autocomplete\n"
+
+#. Plugin Name of the plugin
+msgid "GF Merge Tag Autocomplete"
+msgstr ""
+
+#. Description of the plugin
+msgid "Type { in any Gravity Forms merge-tag-enabled field to instantly search and insert merge tags — no more clicking the {..} button."
+msgstr ""
+
+#. Author of the plugin
+msgid "Guilamu"
+msgstr ""
+
+#: class-gf-merge-tag-autocomplete.php:68
+msgid "No merge tags found"
+msgstr ""
+
+#: includes/class-github-updater.php:385
+msgid "Unable to rename the update folder. Please retry or update manually."
+msgstr ""
+
+#: gf-merge-tag-autocomplete.php:73
+msgid "🐛 Report a Bug"
+msgstr ""
+
+#: gf-merge-tag-autocomplete.php:78
+msgid "🐛 Report a Bug (install Bug Reporter)"
+msgstr ""

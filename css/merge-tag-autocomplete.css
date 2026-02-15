@@ -1,0 +1,104 @@
+/**
+ * GF Merge Tag Autocomplete — Dropdown Styles
+ *
+ * Matches the flat-div structure rendered by merge-tag-autocomplete.js:
+ *   #gf-mta-dropdown
+ *     > .gf-mta-group   (group header)
+ *     > .gf-mta-item    (selectable tag)
+ *     > .gf-mta-empty   ("no results" message)
+ *
+ * @package GF_Merge_Tag_Autocomplete
+ * @since   1.0.0
+ */
+
+/* ------------------------------------------------------------------ */
+/* Dropdown container                                                  */
+/* ------------------------------------------------------------------ */
+#gf-mta-dropdown {
+	display: none;
+	position: absolute;
+	z-index: 160000; /* above TinyMCE & GF modals */
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	min-width: 320px;
+	max-width: 500px;
+	width: max-content;
+	max-height: 340px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 13px;
+	line-height: 1.4;
+	padding: 4px 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Group header                                                        */
+/* ------------------------------------------------------------------ */
+#gf-mta-dropdown .gf-mta-group {
+	padding: 6px 12px 4px;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #888;
+	letter-spacing: 0.5px;
+	cursor: default;
+	user-select: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tag item                                                            */
+/* ------------------------------------------------------------------ */
+#gf-mta-dropdown .gf-mta-item {
+	padding: 6px 12px;
+	color: #333;
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+#gf-mta-dropdown .gf-mta-item .gf-mta-item-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+#gf-mta-dropdown .gf-mta-item .gf-mta-item-tag {
+	flex: 0 0 auto;
+	font-size: 11px;
+	color: #999;
+	font-family: Menlo, Consolas, "Courier New", monospace;
+	max-width: 45%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#gf-mta-dropdown .gf-mta-item:hover,
+#gf-mta-dropdown .gf-mta-item.gf-mta-highlight {
+	background: #0073aa;
+	color: #fff;
+}
+
+#gf-mta-dropdown .gf-mta-item:hover .gf-mta-item-tag,
+#gf-mta-dropdown .gf-mta-item.gf-mta-highlight .gf-mta-item-tag {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+/* ------------------------------------------------------------------ */
+/* Empty state                                                         */
+/* ------------------------------------------------------------------ */
+#gf-mta-dropdown .gf-mta-empty {
+	padding: 12px;
+	text-align: center;
+	color: #999;
+	cursor: default;
+}
