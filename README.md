@@ -56,6 +56,9 @@ Use the **Up** and **Down** arrow keys to highlight a tag, and press **Tab** or 
 │   └── merge-tag-autocomplete.js      # Main trigger, collection, and UI logic
 ├── css
 │   └── merge-tag-autocomplete.css     # Dropdown and item styling
+├── languages
+│   ├── gf-merge-tag-autocomplete.pot  # Translation template
+│   └── gf-merge-tag-autocomplete-fr_FR.po # French translation source
 └── README.md                          # Plugin documentation
 ```
 
