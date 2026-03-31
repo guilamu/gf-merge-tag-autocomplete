@@ -4,7 +4,7 @@
  * Plugin Name: GF Merge Tag Autocomplete
  * Plugin URI:  https://github.com/guilamu/gf-merge-tag-autocomplete
  * Description: Type { in any Gravity Forms merge-tag-enabled field to instantly search and insert merge tags — no more clicking the {..} button.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Guilamu
  * Author URI:  https://github.com/guilamu
  * Text Domain: gf-merge-tag-autocomplete
@@ -20,7 +20,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('GF_MTA_VERSION', '1.0.0');
+define('GF_MTA_VERSION', '1.0.1');
 define('GF_MTA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('GF_MTA_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -66,6 +66,18 @@ add_filter('plugin_row_meta', function ($links, $file) {
 	if (plugin_basename(__FILE__) !== $file) {
 		return $links;
 	}
+
+	// "View details" thickbox link — same pattern as WordPress.org-hosted plugins.
+	$links[] = sprintf(
+		'<a href="%s" class="thickbox open-plugin-details-modal" aria-label="%s" data-title="%s">%s</a>',
+		esc_url(self_admin_url(
+			'plugin-install.php?tab=plugin-information&plugin=gf-merge-tag-autocomplete'
+			. '&TB_iframe=true&width=772&height=926'
+		)),
+		esc_attr__('More information about GF Merge Tag Autocomplete', 'gf-merge-tag-autocomplete'),
+		esc_attr__('GF Merge Tag Autocomplete', 'gf-merge-tag-autocomplete'),
+		esc_html__('View details', 'gf-merge-tag-autocomplete')
+	);
 
 	if (class_exists('Guilamu_Bug_Reporter')) {
 		$links[] = sprintf(

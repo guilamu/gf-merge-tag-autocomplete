@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the GF Merge Tag Autocomplete plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: GF Merge Tag Autocomplete 1.0.0\n"
+"Project-Id-Version: GF Merge Tag Autocomplete 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/guilamu/gf-merge-tag-autocomplete/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-15T20:58:00+00:00\n"
+"POT-Creation-Date: 2026-03-31T00:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: gf-merge-tag-autocomplete\n"
@@ -30,14 +30,22 @@ msgstr ""
 msgid "No merge tags found"
 msgstr ""
 
-#: includes/class-github-updater.php:385
+#: includes/class-github-updater.php:586
 msgid "Unable to rename the update folder. Please retry or update manually."
 msgstr ""
 
-#: gf-merge-tag-autocomplete.php:73
+#: gf-merge-tag-autocomplete.php:77
+msgid "More information about GF Merge Tag Autocomplete"
+msgstr ""
+
+#: gf-merge-tag-autocomplete.php:79
+msgid "View details"
+msgstr ""
+
+#: gf-merge-tag-autocomplete.php:86
 msgid "🐛 Report a Bug"
 msgstr ""
 
-#: gf-merge-tag-autocomplete.php:78
+#: gf-merge-tag-autocomplete.php:92
 msgid "🐛 Report a Bug (install Bug Reporter)"
 msgstr ""

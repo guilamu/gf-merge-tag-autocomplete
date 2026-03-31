@@ -64,6 +64,11 @@ Use the **Up** and **Down** arrow keys to highlight a tag, and press **Tab** or 
 
 ## Changelog
 
+### 1.0.1
+- Added "View details" thickbox link in plugin row meta
+- Rewritten GitHub updater with README.md parsing, Parsedown support, and plugin info CSS
+- Added Gravity Forms version requirement in plugin details sidebar
+
 ### 1.0.0
 - Initial release
 - Robust `{` trigger detection for plain inputs and TinyMCE
