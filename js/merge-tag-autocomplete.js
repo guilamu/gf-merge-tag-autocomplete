@@ -46,12 +46,14 @@
 	$(document).ready(function () {
 		log('Document ready. form defined:', typeof window.form !== 'undefined', '| gfMergeTagsObj defined:', typeof window.gfMergeTagsObj !== 'undefined', '| tinymce defined:', typeof window.tinymce !== 'undefined');
 		buildDropdown();
+		disableNativeAutocomplete();
 		bindPlainFields();
 		bindEditors();
 
 		// Re-bind when GF dynamically re-initialises merge tag support.
 		$(document).on('gform_load_merge_tags', function () {
 			log('gform_load_merge_tags event detected. Re-binding.');
+			disableNativeAutocomplete();
 			bindPlainFields();
 			bindEditors();
 		});
@@ -71,6 +73,67 @@
 	function buildDropdown() {
 		dropdown = $('<div id="gf-mta-dropdown" class="gf-mta-dropdown" style="display:none;" role="listbox"></div>');
 		$('body').append(dropdown);
+	}
+
+	function disableNativeAutocomplete(target) {
+		if (typeof $.fn.autocomplete !== 'function') {
+			return;
+		}
+
+		var $fields = target && target.jquery
+			? target.filter('.merge-tag-support').add(target.find('.merge-tag-support'))
+			: $('.merge-tag-support');
+
+		$fields.each(function () {
+			var $field = $(this);
+			var instance = null;
+
+			try {
+				instance = $field.autocomplete('instance');
+			} catch (error) {
+				log('autocomplete instance lookup failed:', this.id || this.name || this.tagName, error);
+			}
+
+			if (instance && instance.menu && instance.menu.element) {
+				instance.menu.element.hide();
+			}
+
+			if (instance) {
+				$field.autocomplete('destroy');
+			}
+
+			$field.removeClass('ui-autocomplete-input');
+			$field.removeAttr('aria-autocomplete aria-haspopup aria-owns aria-expanded');
+		});
+
+		$('ul.ui-autocomplete:visible').hide();
+	}
+
+	function createTemporaryMergeTagsElement(elem) {
+		if (!(elem && elem.jquery && elem.length)) {
+			return $('<input type="text" class="merge-tag-support" />');
+		}
+
+		return elem.eq(0)
+			.clone(false, false)
+			.removeClass('ui-autocomplete-input')
+			.removeAttr('aria-autocomplete aria-haspopup aria-owns aria-expanded');
+	}
+
+	function cleanupTemporaryMergeTagsElement(elem) {
+		if (!(elem && elem.jquery && elem.length) || typeof $.fn.autocomplete !== 'function') {
+			return;
+		}
+
+		try {
+			if (elem.autocomplete('instance')) {
+				elem.autocomplete('destroy');
+			}
+		} catch (error) {
+			log('temporary autocomplete cleanup failed:', error);
+		}
+
+		$('ul.ui-autocomplete:visible').hide();
 	}
 
 	/* ------------------------------------------------------------------ */
@@ -105,14 +168,16 @@
 		}
 
 		if (!mto && typeof gfMTO === 'function' && typeof gfForm !== 'undefined') {
-			var targetElem = (elem && elem.jquery && elem.length) ? elem : $('<input />');
-			log('Building temporary gfMergeTagsObj with elem:', targetElem.length ? '#' + (targetElem.attr('id') || '(no id)') : '(detached input)');
+			var targetElem = createTemporaryMergeTagsElement(elem);
+			log('Building temporary gfMergeTagsObj with detached elem:', targetElem.length ? '#' + (targetElem.attr('id') || '(no id)') : '(detached input)');
 			try {
 				mto = new gfMTO(gfForm, targetElem);
 				log('gfMergeTagsObj created successfully. Has getMergeTags:', typeof mto.getMergeTags);
 			} catch (ex) {
 				log('gfMergeTagsObj constructor threw:', ex);
 				mto = null;
+			} finally {
+				cleanupTemporaryMergeTagsElement(targetElem);
 			}
 		} else if (!mto) {
 			log('Cannot build fallback. gfMergeTagsObj:', typeof gfMTO, '| form:', typeof gfForm);
@@ -388,18 +453,18 @@
 
 	/**
 	 * Get a bounding rect near the caret of a plain input/textarea.
+	 * Returns viewport coordinates so open() can convert them to page space.
 	 * Uses a mirror-div technique for textareas, or element rect for inputs.
 	 */
 	function getCaretRect(el) {
-		var $el = $(el);
-		var offset = $el.offset();
+		var elementRect = el.getBoundingClientRect();
 
 		// For single-line inputs, just position below the field.
 		if (el.tagName === 'INPUT') {
 			return {
-				top: offset.top,
-				bottom: offset.top + $el.outerHeight(),
-				left: offset.left
+				top: elementRect.top,
+				bottom: elementRect.bottom,
+				left: elementRect.left
 			};
 		}
 
@@ -432,13 +497,13 @@
 		mirror.text(value).append(span);
 		$('body').append(mirror);
 
-		var offset = $el.offset();
+		var elementRect = el.getBoundingClientRect();
 		var spanPos = span.position();
 
 		var rect = {
-			top: offset.top + spanPos.top - el.scrollTop,
-			bottom: offset.top + spanPos.top - el.scrollTop + parseInt($el.css('line-height'), 10),
-			left: offset.left + spanPos.left
+			top: elementRect.top + spanPos.top - el.scrollTop,
+			bottom: elementRect.top + spanPos.top - el.scrollTop + parseInt($el.css('line-height'), 10),
+			left: elementRect.left + spanPos.left
 		};
 
 		mirror.remove();
@@ -504,7 +569,7 @@
 	}
 
 	/**
-	 * Convert a relative editor rect to absolute page coordinates.
+	 * Convert a relative editor rect to top-level viewport coordinates.
 	 */
 	function calculateAbsoluteRect(editorId, relativeRect) {
 		var iframe = $('#' + editorId + '_ifr');
@@ -541,6 +606,8 @@
 
 	function handlePlainKeyDown(e) {
 		var el = e.target;
+
+		disableNativeAutocomplete($(el));
 
 		// --- While dropdown is open: handle navigation keys. ---
 		if (isOpen && triggerTarget && triggerTarget.type === 'input' && triggerTarget.id === el.id) {

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the GF Merge Tag Autocomplete plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: GF Merge Tag Autocomplete 1.0.1\n"
+"Project-Id-Version: GF Merge Tag Autocomplete 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/guilamu/gf-merge-tag-autocomplete/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"

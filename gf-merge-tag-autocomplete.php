@@ -4,7 +4,7 @@
  * Plugin Name: GF Merge Tag Autocomplete
  * Plugin URI:  https://github.com/guilamu/gf-merge-tag-autocomplete
  * Description: Type { in any Gravity Forms merge-tag-enabled field to instantly search and insert merge tags — no more clicking the {..} button.
- * Version:     1.0.1
+ * Version:     1.0.3
  * Author:      Guilamu
  * Author URI:  https://github.com/guilamu
  * Text Domain: gf-merge-tag-autocomplete
@@ -20,7 +20,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('GF_MTA_VERSION', '1.0.1');
+define('GF_MTA_VERSION', '1.0.3');
 define('GF_MTA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('GF_MTA_PLUGIN_URL', plugin_dir_url(__FILE__));
 

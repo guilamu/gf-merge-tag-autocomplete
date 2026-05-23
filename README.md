@@ -64,6 +64,11 @@ Use the **Up** and **Down** arrow keys to highlight a tag, and press **Tab** or 
 
 ## Changelog
 
+### 1.0.3
+- Prevent the custom autocomplete from re-triggering Gravity Forms' native jQuery UI autocomplete during tag collection
+- Fix Code tab merge-tag dropdown positioning so the custom menu appears beside the typed `{` instead of lower in the textarea
+- Disable Gravity Forms' native jQuery UI autocomplete on fields handled by this plugin to prevent duplicate dropdowns
+
 ### 1.0.1
 - Added "View details" thickbox link in plugin row meta
 - Rewritten GitHub updater with README.md parsing, Parsedown support, and plugin info CSS
